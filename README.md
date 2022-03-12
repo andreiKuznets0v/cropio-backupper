@@ -1,9 +1,23 @@
-# CropioBackupper
+# CropioBackupper in compose
+Original repo is [CropioBackupper](https://github.com/cropio/cropio-backupper)
+
+
+## Launch using docker-compose
+Need install docker and docker-compose
+Update Cropio credentials in docker-compose.yml file
+``` sh
+git clone [progect URL]
+mkdir -p /docker_volumes/redis_db
+mkdir -p /docker_volumes/postgres_db
+mkdir -p /docker_volumes/postgres_dump
+cd cropio-backupper
+docker-compose up -d
+```
+
+## Launch using rake task
 PostgreSQL (including Postgis) and Redis are required to run backupper.
 
 Script to create tables in DB — `cropio_api_structure.sql`
-
-## Launch using rake task
 * install ruby-2.3.1, rubygems, bundler
 * run `bundle install`
 * add required environment variables:
