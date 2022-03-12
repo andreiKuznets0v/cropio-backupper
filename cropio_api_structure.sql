@@ -1,4 +1,4 @@
-CREATE TABLE additional_objects (
+CREATE TABLE IF NOT EXISTS additional_objects (
     id integer NOT NULL,
     field_group_id integer,
     name character varying(255),
@@ -20,7 +20,7 @@ CREATE TABLE additional_objects (
 
 ALTER TABLE additional_objects ADD PRIMARY KEY (id);
 
-CREATE TABLE agri_work_plans (
+CREATE TABLE IF NOT EXISTS agri_work_plans (
     id integer NOT NULL,
     work_type character varying(255) NOT NULL,
     work_subtype character varying(255),
@@ -45,7 +45,7 @@ CREATE TABLE agri_work_plans (
 
 ALTER TABLE agri_work_plans ADD PRIMARY KEY (id);
 
-CREATE TABLE agri_work_plan_application_mix_items (
+CREATE TABLE IF NOT EXISTS agri_work_plan_application_mix_items (
     id integer NOT NULL,
     agri_work_plan_id integer NOT NULL,
     applicable_id integer NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE agri_work_plan_application_mix_items (
 
 ALTER TABLE agri_work_plan_application_mix_items ADD PRIMARY KEY (id);
 
-CREATE TABLE agro_operations (
+CREATE TABLE IF NOT EXISTS agro_operations (
     id integer NOT NULL,
     field_id integer,
     planned_start_date date,
@@ -99,7 +99,7 @@ CREATE TABLE agro_operations (
 
 ALTER TABLE agro_operations ADD PRIMARY KEY (id);
 
-CREATE TABLE application_mix_items (
+CREATE TABLE IF NOT EXISTS application_mix_items (
     id integer NOT NULL,
     agro_operation_id integer NOT NULL,
     applicable_id integer NOT NULL,
@@ -114,7 +114,7 @@ CREATE TABLE application_mix_items (
 
 ALTER TABLE application_mix_items ADD PRIMARY KEY (id);
 
-CREATE TABLE chemicals (
+CREATE TABLE IF NOT EXISTS chemicals (
     id integer NOT NULL,
     name character varying(255) NOT NULL,
     chemical_type character varying(255) NOT NULL,
@@ -129,7 +129,7 @@ CREATE TABLE chemicals (
 
 ALTER TABLE chemicals ADD PRIMARY KEY (id);
 
-CREATE TABLE crops (
+CREATE TABLE IF NOT EXISTS crops (
     id integer NOT NULL,
     name character varying(255),
     short_name character varying(255),
@@ -143,7 +143,7 @@ CREATE TABLE crops (
 
 ALTER TABLE crops ADD PRIMARY KEY (id);
 
-CREATE TABLE fertilizers (
+CREATE TABLE IF NOT EXISTS fertilizers (
     id integer NOT NULL,
     name character varying(255),
     fertilizer_type character varying(255) DEFAULT 'granular'::character varying NOT NULL,
@@ -158,7 +158,7 @@ CREATE TABLE fertilizers (
 
 ALTER TABLE fertilizers ADD PRIMARY KEY (id);
 
-CREATE TABLE field_groups (
+CREATE TABLE IF NOT EXISTS field_groups (
     id integer NOT NULL,
     name character varying(255),
     administrative_area_name character varying(255),
@@ -174,7 +174,7 @@ CREATE TABLE field_groups (
 
 ALTER TABLE field_groups ADD PRIMARY KEY (id);
 
-CREATE TABLE field_scout_report_threat_mapping_items (
+CREATE TABLE IF NOT EXISTS field_scout_report_threat_mapping_items (
     id integer NOT NULL,
     field_scout_report_id integer NOT NULL,
     plant_threat_id integer,
@@ -187,7 +187,7 @@ CREATE TABLE field_scout_report_threat_mapping_items (
 
 ALTER TABLE field_scout_report_threat_mapping_items ADD PRIMARY KEY (id);
 
-CREATE TABLE field_scout_reports (
+CREATE TABLE IF NOT EXISTS field_scout_reports (
     id integer NOT NULL,
     user_id integer NOT NULL,
     field_id integer NOT NULL,
@@ -215,7 +215,7 @@ CREATE TABLE field_scout_reports (
 
 ALTER TABLE field_scout_reports ADD PRIMARY KEY (id);
 
-CREATE TABLE field_shapes (
+CREATE TABLE IF NOT EXISTS field_shapes (
     id integer NOT NULL,
     field_id integer,
     start_time timestamp without time zone NOT NULL,
@@ -232,7 +232,7 @@ CREATE TABLE field_shapes (
 
 ALTER TABLE field_shapes ADD PRIMARY KEY (id);
 
-CREATE TABLE fields (
+CREATE TABLE IF NOT EXISTS fields (
     id integer NOT NULL,
     name character varying(255),
     description text,
@@ -253,7 +253,7 @@ CREATE TABLE fields (
 
 ALTER TABLE fields ADD PRIMARY KEY (id);
 
-CREATE TABLE group_folders (
+CREATE TABLE IF NOT EXISTS group_folders (
     id integer NOT NULL,
     name character varying(255),
     parent_id character varying(255),
@@ -264,7 +264,7 @@ CREATE TABLE group_folders (
 
 ALTER TABLE group_folders ADD PRIMARY KEY (id);
 
-CREATE TABLE harvest_weighings (
+CREATE TABLE IF NOT EXISTS harvest_weighings (
     id integer NOT NULL,
     machine_id integer NOT NULL,
     field_id integer,
@@ -289,7 +289,7 @@ CREATE TABLE harvest_weighings (
 
 ALTER TABLE harvest_weighings ADD PRIMARY KEY (id);
 
-CREATE TABLE historical_values (
+CREATE TABLE IF NOT EXISTS historical_values (
     id integer NOT NULL,
     field_id integer,
     created_at timestamp without time zone NOT NULL,
@@ -301,7 +301,7 @@ CREATE TABLE historical_values (
 
 ALTER TABLE historical_values ADD PRIMARY KEY (id);
 
-CREATE TABLE history_items (
+CREATE TABLE IF NOT EXISTS history_items (
     id integer NOT NULL,
     field_id integer,
     year integer,
@@ -320,7 +320,7 @@ CREATE TABLE history_items (
 
 ALTER TABLE history_items ADD PRIMARY KEY (id);
 
-CREATE TABLE implements (
+CREATE TABLE IF NOT EXISTS implements (
     id integer NOT NULL,
     manufacturer character varying(255),
     model character varying(255),
@@ -347,7 +347,7 @@ CREATE TABLE implements (
 
 ALTER TABLE implements ADD PRIMARY KEY (id);
 
-CREATE TABLE machine_groups (
+CREATE TABLE IF NOT EXISTS machine_groups (
     id integer NOT NULL,
     name character varying(255),
     description text,
@@ -358,7 +358,7 @@ CREATE TABLE machine_groups (
 
 ALTER TABLE machine_groups ADD PRIMARY KEY (id);
 
-CREATE TABLE machine_task_agro_operation_mapping_items (
+CREATE TABLE IF NOT EXISTS machine_task_agro_operation_mapping_items (
     id integer NOT NULL,
     machine_task_id integer NOT NULL,
     agro_operation_id integer NOT NULL,
@@ -368,7 +368,7 @@ CREATE TABLE machine_task_agro_operation_mapping_items (
 
 ALTER TABLE machine_task_agro_operation_mapping_items ADD PRIMARY KEY (id);
 
-CREATE TABLE machine_tasks (
+CREATE TABLE IF NOT EXISTS machine_tasks (
     id integer NOT NULL,
     machine_id integer,
     start_time timestamp without time zone,
@@ -412,7 +412,7 @@ CREATE TABLE machine_tasks (
 
 ALTER TABLE machine_tasks ADD PRIMARY KEY (id);
 
-CREATE TABLE machines (
+CREATE TABLE IF NOT EXISTS machines (
     id integer NOT NULL,
     manufacturer character varying(255),
     model character varying(255),
@@ -442,7 +442,7 @@ CREATE TABLE machines (
 
 ALTER TABLE machines ADD PRIMARY KEY (id);
 
-CREATE TABLE notes (
+CREATE TABLE IF NOT EXISTS notes (
     id integer NOT NULL,
     user_id integer NOT NULL,
     notable_id integer NOT NULL,
@@ -463,7 +463,7 @@ CREATE TABLE notes (
 
 ALTER TABLE notes ADD PRIMARY KEY (id);
 
-CREATE TABLE plant_threats (
+CREATE TABLE IF NOT EXISTS plant_threats (
     id integer NOT NULL,
     name character varying NOT NULL,
     code character varying,
@@ -478,7 +478,7 @@ CREATE TABLE plant_threats (
 
 ALTER TABLE plant_threats ADD PRIMARY KEY (id);
 
-CREATE TABLE satellite_images (
+CREATE TABLE IF NOT EXISTS satellite_images (
     id integer NOT NULL,
     item_type character varying(255) NOT NULL,
     item_id integer NOT NULL,
@@ -492,7 +492,7 @@ CREATE TABLE satellite_images (
 
 ALTER TABLE satellite_images ADD PRIMARY KEY (id);
 
-CREATE TABLE seeds (
+CREATE TABLE IF NOT EXISTS seeds (
     id integer NOT NULL,
     name character varying(255),
     crop_id integer,
@@ -508,7 +508,7 @@ CREATE TABLE seeds (
 
 ALTER TABLE seeds ADD PRIMARY KEY (id);
 
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id integer NOT NULL,
     email character varying DEFAULT ''::character varying NOT NULL,
     current_sign_in_at timestamp without time zone,
@@ -535,7 +535,7 @@ CREATE TABLE users (
 
 ALTER TABLE users ADD PRIMARY KEY (id);
 
-CREATE TABLE user_roles (
+CREATE TABLE IF NOT EXISTS user_roles (
     id integer NOT NULL,
     name character varying(255) NOT NULL,
     description text,
@@ -545,7 +545,7 @@ CREATE TABLE user_roles (
 
 ALTER TABLE user_roles ADD PRIMARY KEY (id);
 
-CREATE TABLE user_role_assignments (
+CREATE TABLE IF NOT EXISTS user_role_assignments (
     id integer NOT NULL,
     user_id integer NOT NULL,
     user_role_id integer NOT NULL,
@@ -555,7 +555,7 @@ CREATE TABLE user_role_assignments (
 
 ALTER TABLE user_role_assignments ADD PRIMARY KEY (id);
 
-CREATE TABLE user_role_permissions (
+CREATE TABLE IF NOT EXISTS user_role_permissions (
     id integer NOT NULL,
     user_role_id integer NOT NULL,
     access_level character varying(255) NOT NULL,
@@ -568,7 +568,7 @@ CREATE TABLE user_role_permissions (
 
 ALTER TABLE user_role_permissions ADD PRIMARY KEY (id);
 
-CREATE TABLE weather_history_items (
+CREATE TABLE IF NOT EXISTS weather_history_items (
     id integer NOT NULL,
     date character varying(255),
     temperature_min decimal,
@@ -581,7 +581,7 @@ CREATE TABLE weather_history_items (
 
 ALTER TABLE weather_history_items ADD PRIMARY KEY (id);
 
-CREATE TABLE avatars (
+CREATE TABLE IF NOT EXISTS avatars (
     id integer NOT NULL,
     avatar_type character varying(255),
     name character varying(255),
@@ -591,7 +591,7 @@ CREATE TABLE avatars (
 
 ALTER TABLE avatars ADD PRIMARY KEY (id);
 
-CREATE TABLE versions (
+CREATE TABLE IF NOT EXISTS versions (
     id integer NOT NULL,
     item_type character varying(255) NOT NULL,
     item_id integer NOT NULL,
@@ -604,7 +604,7 @@ CREATE TABLE versions (
 
 ALTER TABLE versions ADD PRIMARY KEY (id);
 
-CREATE TABLE work_records (
+CREATE TABLE IF NOT EXISTS work_records (
     id integer NOT NULL,
     user_id integer NOT NULL,
     start_time timestamp without time zone NOT NULL,
@@ -616,7 +616,7 @@ CREATE TABLE work_records (
 
 ALTER TABLE work_records ADD PRIMARY KEY (id);
 
-CREATE TABLE work_record_machine_region_mapping_items (
+CREATE TABLE IF NOT EXISTS work_record_machine_region_mapping_items (
     id integer NOT NULL,
     work_record_id integer NOT NULL,
     machine_region_id integer NOT NULL,
@@ -626,7 +626,7 @@ CREATE TABLE work_record_machine_region_mapping_items (
 
 ALTER TABLE work_record_machine_region_mapping_items ADD PRIMARY KEY (id);
 
-CREATE TABLE work_type_groups (
+CREATE TABLE IF NOT EXISTS work_type_groups (
     id integer NOT NULL,
     name character varying(255),
     standard_name character varying(255),
@@ -638,7 +638,7 @@ CREATE TABLE work_type_groups (
 
 ALTER TABLE work_type_groups ADD PRIMARY KEY (id);
 
-CREATE TABLE work_types (
+CREATE TABLE IF NOT EXISTS work_types (
     id integer NOT NULL,
     work_type_group_id integer NOT NULL,
     name character varying(255),
@@ -657,7 +657,7 @@ CREATE TABLE work_types (
 
 ALTER TABLE work_types ADD PRIMARY KEY (id);
 
-CREATE TABLE machine_task_field_mapping_items (
+CREATE TABLE IF NOT EXISTS machine_task_field_mapping_items (
     id integer NOT NULL,
     machine_task_id integer NOT NULL,
     field_id integer NOT NULL,
@@ -685,7 +685,7 @@ CREATE TABLE machine_task_field_mapping_items (
 
 ALTER TABLE machine_task_field_mapping_items ADD PRIMARY KEY (id);
 
-CREATE TABLE alert_types (
+CREATE TABLE IF NOT EXISTS alert_types (
     id integer NOT NULL,
     alert_type character varying(255),
     name character varying(255),
@@ -699,7 +699,7 @@ CREATE TABLE alert_types (
 
 ALTER TABLE alert_types ADD PRIMARY KEY (id);
 
-CREATE TABLE alerts (
+CREATE TABLE IF NOT EXISTS alerts (
     id integer NOT NULL,
     alert_type_id integer NOT NULL,
     alertable_id integer NOT NULL,
@@ -718,7 +718,7 @@ CREATE TABLE alerts (
 
 ALTER TABLE alerts ADD PRIMARY KEY (id);
 
-CREATE TABLE machine_regions (
+CREATE TABLE IF NOT EXISTS machine_regions (
     id integer NOT NULL,
     name character varying(255),
     ancestry character varying,
@@ -730,7 +730,7 @@ CREATE TABLE machine_regions (
 
 ALTER TABLE machine_regions ADD PRIMARY KEY (id);
 
-CREATE TABLE machine_region_mapping_items (
+CREATE TABLE IF NOT EXISTS machine_region_mapping_items (
     id integer NOT NULL,
     machine_id integer NOT NULL,
     machine_region_id integer NOT NULL,
@@ -743,7 +743,7 @@ CREATE TABLE machine_region_mapping_items (
 
 ALTER TABLE machine_region_mapping_items ADD PRIMARY KEY (id);
 
-CREATE TABLE implement_region_mapping_items (
+CREATE TABLE IF NOT EXISTS implement_region_mapping_items (
     id integer NOT NULL,
     implement_id integer NOT NULL,
     machine_region_id integer NOT NULL,
@@ -756,7 +756,7 @@ CREATE TABLE implement_region_mapping_items (
 
 ALTER TABLE implement_region_mapping_items ADD PRIMARY KEY (id);
 
-CREATE TABLE inventory_history_items (
+CREATE TABLE IF NOT EXISTS inventory_history_items (
     id integer NOT NULL,
     historyable_id integer NOT NULL,
     historyable_type character varying,
@@ -773,7 +773,7 @@ CREATE TABLE inventory_history_items (
 
 ALTER TABLE inventory_history_items ADD PRIMARY KEY (id);
 
-CREATE TABLE automatic_alerts (
+CREATE TABLE IF NOT EXISTS automatic_alerts (
     id integer NOT NULL,
     alert_type_id integer NOT NULL,
     automatic_alert_type character varying(255),
@@ -792,7 +792,7 @@ CREATE TABLE automatic_alerts (
 
 ALTER TABLE automatic_alerts ADD PRIMARY KEY (id);
 
-CREATE TABLE photos (
+CREATE TABLE IF NOT EXISTS photos (
     id integer NOT NULL,
     photoable_id integer NOT NULL,
     photoable_type character varying(255),
@@ -814,7 +814,7 @@ CREATE TABLE photos (
 
 ALTER TABLE photos ADD PRIMARY KEY (id);
 
-CREATE TABLE soil_tests (
+CREATE TABLE IF NOT EXISTS soil_tests (
     id integer NOT NULL,
     field_id integer NOT NULL,
     made_at date NOT NULL,
@@ -827,7 +827,7 @@ CREATE TABLE soil_tests (
 
 ALTER TABLE soil_tests ADD PRIMARY KEY (id);
 
-CREATE TABLE soil_test_samples (
+CREATE TABLE IF NOT EXISTS soil_test_samples (
     id integer NOT NULL,
     soil_test_id integer NOT NULL,
     lonlat geography(Point,4326),
@@ -838,7 +838,7 @@ CREATE TABLE soil_test_samples (
 
 ALTER TABLE soil_test_samples ADD PRIMARY KEY (id);
 
-CREATE TABLE maintenance_types
+CREATE TABLE IF NOT EXISTS maintenance_types
 (
   id integer NOT NULL,
   maintenance_type_group_id integer NOT NULL,
@@ -853,7 +853,7 @@ CREATE TABLE maintenance_types
 
 ALTER TABLE maintenance_types ADD PRIMARY KEY (id);
 
-CREATE TABLE maintenance_type_groups
+CREATE TABLE IF NOT EXISTS maintenance_type_groups
 (
   id integer NOT NULL,
   name character varying,
@@ -866,7 +866,7 @@ CREATE TABLE maintenance_type_groups
 
 ALTER TABLE maintenance_type_groups ADD PRIMARY KEY (id);
 
-CREATE TABLE maintenance_records
+CREATE TABLE IF NOT EXISTS maintenance_records
 (
   id integer NOT NULL,
   maintainable_id integer NOT NULL,
@@ -885,7 +885,7 @@ CREATE TABLE maintenance_records
 
 ALTER TABLE maintenance_records ADD PRIMARY KEY (id);
 
-CREATE TABLE maintenance_record_rows
+CREATE TABLE IF NOT EXISTS maintenance_record_rows
 (
   id integer NOT NULL,
   maintenance_record_id integer NOT NULL,
@@ -898,7 +898,7 @@ CREATE TABLE maintenance_record_rows
 
 ALTER TABLE maintenance_record_rows ADD PRIMARY KEY (id);
 
-CREATE TABLE spare_part_manufacturers
+CREATE TABLE IF NOT EXISTS spare_part_manufacturers
 (
   id integer NOT NULL,
   name character varying NOT NULL,
@@ -909,7 +909,7 @@ CREATE TABLE spare_part_manufacturers
 
 ALTER TABLE spare_part_manufacturers ADD PRIMARY KEY (id);
 
-CREATE TABLE spare_parts
+CREATE TABLE IF NOT EXISTS spare_parts
 (
   id integer NOT NULL,
   spare_part_manufacturer_id bigint NOT NULL,
@@ -925,7 +925,7 @@ CREATE TABLE spare_parts
 
 ALTER TABLE spare_parts ADD PRIMARY KEY (id);
 
-CREATE TABLE maintenance_plan_row_spare_part_mapping_items
+CREATE TABLE IF NOT EXISTS maintenance_plan_row_spare_part_mapping_items
 (
   id integer NOT NULL,
   maintenance_plan_row_id bigint NOT NULL,
@@ -937,7 +937,7 @@ CREATE TABLE maintenance_plan_row_spare_part_mapping_items
 
 ALTER TABLE maintenance_plan_row_spare_part_mapping_items ADD PRIMARY KEY (id);
 
-CREATE TABLE maintenance_record_row_spare_part_mapping_items
+CREATE TABLE IF NOT EXISTS maintenance_record_row_spare_part_mapping_items
 (
   id integer NOT NULL,
   maintenance_record_row_id bigint NOT NULL,
@@ -949,7 +949,7 @@ CREATE TABLE maintenance_record_row_spare_part_mapping_items
 
 ALTER TABLE maintenance_record_row_spare_part_mapping_items ADD PRIMARY KEY (id);
 
-CREATE TABLE maintenance_plans
+CREATE TABLE IF NOT EXISTS maintenance_plans
 (
   id integer NOT NULL,
   plan_type character varying NOT NULL,
@@ -964,7 +964,7 @@ CREATE TABLE maintenance_plans
 
 ALTER TABLE maintenance_plans ADD PRIMARY KEY (id);
 
-CREATE TABLE maintenance_plan_rows
+CREATE TABLE IF NOT EXISTS maintenance_plan_rows
 (
   id integer NOT NULL,
   maintenance_plan_id integer NOT NULL,
@@ -980,7 +980,7 @@ CREATE TABLE maintenance_plan_rows
 
 ALTER TABLE maintenance_plan_rows ADD PRIMARY KEY (id);
 
-CREATE TABLE counterparties
+CREATE TABLE IF NOT EXISTS counterparties
 (
     id integer NOT NULL,
     first_name character varying,
@@ -1007,7 +1007,7 @@ CREATE TABLE counterparties
 
 ALTER TABLE counterparties ADD PRIMARY KEY (id);
 
-CREATE TABLE field_shape_land_parcel_mapping_items
+CREATE TABLE IF NOT EXISTS field_shape_land_parcel_mapping_items
 (
     id integer NOT NULL,
     field_shape_id integer NOT NULL,
@@ -1018,7 +1018,7 @@ CREATE TABLE field_shape_land_parcel_mapping_items
 
 ALTER TABLE field_shape_land_parcel_mapping_items ADD PRIMARY KEY (id);
 
-CREATE TABLE land_documents
+CREATE TABLE IF NOT EXISTS land_documents
 (
     id integer NOT NULL,
     document_date date NOT NULL,
@@ -1049,7 +1049,7 @@ CREATE TABLE land_documents
 
 ALTER TABLE land_documents ADD PRIMARY KEY (id);
 
-CREATE TABLE land_document_land_parcel_mapping_items
+CREATE TABLE IF NOT EXISTS land_document_land_parcel_mapping_items
 (
     id integer NOT NULL,
     land_document_id integer NOT NULL,
@@ -1062,7 +1062,7 @@ CREATE TABLE land_document_land_parcel_mapping_items
 
 ALTER TABLE land_document_land_parcel_mapping_items ADD PRIMARY KEY (id);
 
-CREATE TABLE land_parcels
+CREATE TABLE IF NOT EXISTS land_parcels
 (
     id integer NOT NULL,
     field_group_id integer NOT NULL,
@@ -1089,7 +1089,7 @@ CREATE TABLE land_parcels
 
 ALTER TABLE land_parcels ADD PRIMARY KEY (id);
 
-CREATE TABLE protected_documents
+CREATE TABLE IF NOT EXISTS protected_documents
 (
     id integer NOT NULL,
     name character varying,
@@ -1103,7 +1103,7 @@ CREATE TABLE protected_documents
 
 ALTER TABLE protected_documents ADD PRIMARY KEY (id);
 
-CREATE TABLE productivity_estimate_histories
+CREATE TABLE IF NOT EXISTS productivity_estimate_histories
 (
     id integer NOT NULL,
     field_id integer,
@@ -1115,7 +1115,7 @@ CREATE TABLE productivity_estimate_histories
 
 ALTER TABLE productivity_estimate_histories ADD PRIMARY KEY (id);
 
-CREATE TABLE fuel_hourly_data_items
+CREATE TABLE IF NOT EXISTS fuel_hourly_data_items
 (
     id integer NOT NULL,
     object_type character varying(255),
@@ -1132,7 +1132,7 @@ CREATE TABLE fuel_hourly_data_items
 
 ALTER TABLE fuel_hourly_data_items ADD PRIMARY KEY (id);
 
-CREATE TABLE productivity_estimates
+CREATE TABLE IF NOT EXISTS productivity_estimates
 (
     id integer NOT NULL,
     field_id integer,
@@ -1145,7 +1145,7 @@ CREATE TABLE productivity_estimates
 
 ALTER TABLE productivity_estimates ADD PRIMARY KEY (id);
 
-CREATE TABLE productivity_estimate_peers
+CREATE TABLE IF NOT EXISTS productivity_estimate_peers
 (
     id integer NOT NULL,
     productivity_estimate_id integer NOT NULL,
@@ -1168,7 +1168,7 @@ CREATE TABLE productivity_estimate_peers
 
 ALTER TABLE productivity_estimate_peers ADD PRIMARY KEY (id);
 
-CREATE TABLE fuel_stations
+CREATE TABLE IF NOT EXISTS fuel_stations
 (
     id integer NOT NULL,
     name character varying,
@@ -1184,7 +1184,7 @@ CREATE TABLE fuel_stations
 
 ALTER TABLE fuel_stations ADD PRIMARY KEY (id);
 
-CREATE TABLE fuel_types
+CREATE TABLE IF NOT EXISTS fuel_types
 (
     id integer NOT NULL,
     name character varying,
@@ -1198,7 +1198,7 @@ CREATE TABLE fuel_types
 
 ALTER TABLE fuel_types ADD PRIMARY KEY (id);
 
-CREATE TABLE fuel_tanks
+CREATE TABLE IF NOT EXISTS fuel_tanks
 (
     id integer NOT NULL,
     fuelable_object_type character varying,
@@ -1213,7 +1213,7 @@ CREATE TABLE fuel_tanks
 
 ALTER TABLE fuel_tanks ADD PRIMARY KEY (id);
 
-CREATE TABLE fuel_pumps
+CREATE TABLE IF NOT EXISTS fuel_pumps
 (
     id integer NOT NULL,
     fuelable_object_type character varying,
@@ -1226,7 +1226,7 @@ CREATE TABLE fuel_pumps
 
 ALTER TABLE fuel_pumps ADD PRIMARY KEY (id);
 
-CREATE TABLE fuel_movements
+CREATE TABLE IF NOT EXISTS fuel_movements
 (
     id integer NOT NULL,
     object_from_id integer,

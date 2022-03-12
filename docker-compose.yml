@@ -1,19 +1,52 @@
 version: '3.7'
 services:
+# docker run -e "REDIS_HOST=" -e "API_TOKEN=" \
+#-e "DB_NAME=" -e "DB_PORT=" -e "DB_USERNAME=" -e  "DB_PASSWORD=" -e "DB_HOST=" \
+#-e "DOWNLOAD_SLEEP=10" --restart=always cropio/cropio-backupper
+    cropio_backupper:
+        container_name: 'cropiobackupper'
+        image: cropio-backupper
+        restart: always
+        environment:
+          - REDIS_HOST: redis
+          - DB_HOST: postgres
+          - DB_PORT: 5432
+          - DB_NAME: cropio
+          - DB_USERNAME: postgres
+          - DB_PASSWORD: postgres
+        depends_on:
+          - postgres
+          - redis
+
     postgres:
+        container_name: 'postgres'
         image: some-postgis:12 #postgres:12
         restart: always
         environment: 
           - POSTGRES_USER=postgres
           - POSTGRES_PASSWORD=postgres
           - POSTGRES_DB=cropio_db
+          - PGDATA=/var/lib/postgresql/data/pgdata
         logging:
           options:
             max-size: 10m
             max-file: "3"
         ports:
-          - '5438:5432'
+          - '127.0.0.1:5438:5432'
         volumes:
-          - ./postgres-data:/var/lib/postgresql/data
+          - postgres-data:/var/lib/postgresql/data
           # copy the sql script to create tables
-          - ./cropio_api_structure.sql:/docker-entrypoint-initdb.d/create_tables.sql
+          - cropio_api_structure:/docker-entrypoint-initdb.d/cropio_api_structure.sql
+
+    redis:
+        container_name: 'redis'
+        restart: always
+        image: 'redis:3.2.0'
+        ports:
+          - '127.0.0.1:6379:6379'
+        volumes:
+          - 'redisdata:/data'
+volumes:
+    redisdata: /docker_volumes/redis_db
+    postgres-data: /docker_volumes/postgres_db
+    cropio_api_structure: ./cropio_api_structure.sql
